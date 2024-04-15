@@ -78,7 +78,7 @@ const closeModal = () => {
 const filteredPosts = computed(() => {
   if (!searchQuery.value) {
     const remaining = posts.value.filter((post) => {
-      const postIdString = post.id.toString(); // Convert post ID to string
+      const postIdString = post.id.toString(); 
       if (!deletedPostsStore.deletedPostIds.includes(postIdString)) {
         return post;
       }
@@ -88,7 +88,7 @@ const filteredPosts = computed(() => {
   } else {
     return posts.value.filter(post =>
       post.title.toLowerCase().startsWith(searchQuery.value.toLowerCase()) &&
-      !deletedPostsStore.deletedPostIds.includes(post.id.toString()) // Convert post ID to string
+      !deletedPostsStore.deletedPostIds.includes(post.id.toString()) 
     );
   }
 });
