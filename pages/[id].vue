@@ -52,7 +52,7 @@ const fetchPost = async () => {
   try {
     const response = await axios.get<Post>(`https://jsonplaceholder.typicode.com/posts/${postId}`);
     post.value = response.data;
-    updatedPost.value = { ...post.value }; // Initialize updatedPost with the current post data
+    updatedPost.value = { ...post.value }; 
   } catch (error) {
     console.error('Error fetching post:', error);
   } finally {
@@ -83,8 +83,8 @@ const updatePost = async () => {
   try {
     const postId = route.params.id;
     const response = await axios.put<Post>(`https://jsonplaceholder.typicode.com/posts/${postId}`, updatedPost.value);
-    post.value = response.data; // Update the local post data
-    isUpdateModalOpen.value = false; // Close the update modal
+    post.value = response.data; 
+    isUpdateModalOpen.value = false; 
   } catch (error) {
     console.error('Error updating post:', error);
   }

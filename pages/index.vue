@@ -39,6 +39,8 @@ const isLoading = ref<boolean>(true);
 const deletedPostsStore = useDeletedPostsStore();
 
 
+
+
 const fetchPosts = async () => {
   isLoading.value = true;
   try {
@@ -72,15 +74,21 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
-
-
 const filteredPosts = computed(() => {
   if (!searchQuery.value) {
-    return posts.value.filter(post => !deletedPostsStore.deletedPostIds.includes(post.id));
+    
+    const remaining = posts.value.filter((post)=>{
+        if(deletedPostsStore.deletedPostIds.includes(post.id)===false){
+            console.log("post",post);
+            
+            return post;
+        }
+    })
+
+    return remaining;
   } else {
     return posts.value.filter(post =>
-      post.title.toLowerCase().startsWith(searchQuery.value.toLowerCase()) &&
-      !deletedPostsStore.deletedPostIds.includes(post.id)
+      post.title.toLowerCase().startsWith(searchQuery.value.toLowerCase()) && !deletedPostsStore.deletedPostIds.includes(post.id)
     );
   }
 });
