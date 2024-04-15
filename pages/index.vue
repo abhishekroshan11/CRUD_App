@@ -74,21 +74,21 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
+
 const filteredPosts = computed(() => {
   if (!searchQuery.value) {
-    
-    const remaining = posts.value.filter((post)=>{
-        if(deletedPostsStore.deletedPostIds.includes(post.id)===false){
-            console.log("post",post);
-            
-            return post;
-        }
-    })
+    const remaining = posts.value.filter((post) => {
+      const postIdString = post.id.toString(); // Convert post ID to string
+      if (!deletedPostsStore.deletedPostIds.includes(postIdString)) {
+        return post;
+      }
+    });
 
     return remaining;
   } else {
     return posts.value.filter(post =>
-      post.title.toLowerCase().startsWith(searchQuery.value.toLowerCase()) && !deletedPostsStore.deletedPostIds.includes(post.id)
+      post.title.toLowerCase().startsWith(searchQuery.value.toLowerCase()) &&
+      !deletedPostsStore.deletedPostIds.includes(post.id.toString()) // Convert post ID to string
     );
   }
 });
