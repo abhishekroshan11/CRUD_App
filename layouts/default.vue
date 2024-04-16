@@ -2,4 +2,4 @@
     <div>
       <Header /> 
     </div>
-  </template>
+</template>
