@@ -41,7 +41,7 @@ const deletedPostsStore = useDeletedPostsStore();
 
 
 
-const fetchPosts = async () => {
+const fetchPosts = async (): Promise<void> => {
   isLoading.value = true;
   try {
     const response = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
@@ -53,11 +53,11 @@ const fetchPosts = async () => {
   }
 };
 
-const openModal = () => {
+const openModal = (): void => {
   isModalOpen.value = true;
 };
 
-const addPost = async () => {
+const addPost = async (): Promise <void> => {
   try {
     const id = (posts.value.length + 1).toString(); 
     const newPostWithId: Post = { ...newPost.value, id }; 
@@ -70,7 +70,7 @@ const addPost = async () => {
   }
 };
 
-const closeModal = () => {
+const closeModal = (): void => {
   isModalOpen.value = false;
 };
 

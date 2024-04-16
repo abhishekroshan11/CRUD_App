@@ -47,7 +47,7 @@ const isUpdateModalOpen = ref<boolean>(false);
 const deletedPostsStore = useDeletedPostsStore();
 const { deletedPostIds } = storeToRefs(deletedPostsStore);
 
-const fetchPost = async () => {
+const fetchPost = async (): Promise <void> => {
   const postId = route.params.id; 
   try {
     const response = await axios.get<Post>(`https://jsonplaceholder.typicode.com/posts/${postId}`);
@@ -60,7 +60,7 @@ const fetchPost = async () => {
   }
 };
 
-const deletePost = async () => {
+const deletePost = async (): Promise <void> => {
   let postId = route.params.id;
   if (Array.isArray(postId)) {
     postId = postId[0];
@@ -75,11 +75,11 @@ const deletePost = async () => {
   }
 };
 
-const openUpdateModal = () => {
+const openUpdateModal = ():void => {
   isUpdateModalOpen.value = true;
 };
 
-const updatePost = async () => {
+const updatePost = async (): Promise<void> => {
   try {
     const postId = route.params.id;
     const response = await axios.put<Post>(`https://jsonplaceholder.typicode.com/posts/${postId}`, updatedPost.value);
